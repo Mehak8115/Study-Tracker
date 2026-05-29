@@ -25,8 +25,8 @@ study_tracker_api/
 
 1. Create and activate a virtual environment:
 ```bash
-python -m venv myenv
-myenv\Scripts\activate
+python -m venv venv
+venv\Scripts\activate
 ```
 
 2. Install dependencies:
