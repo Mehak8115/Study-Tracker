@@ -1,5 +1,11 @@
-from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy import Column, Integer, String, Float, DateTime
 from database import Base
+from datetime import datetime
+
+created_at = Column(
+    DateTime,
+    default=datetime.utcnow
+)
 
 class StudySession(Base):
     __tablename__ = "study_sessions"

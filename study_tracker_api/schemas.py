@@ -1,10 +1,9 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class SessionCreate(BaseModel):
     topic: str
-    hours_spent: float
+    hours_spent: float = Field(gt=0)
     status: str
-
 
 class SessionResponse(SessionCreate):
     id: int

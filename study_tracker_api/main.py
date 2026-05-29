@@ -1,11 +1,8 @@
 # stores all the data but if server restarts everything is lost,hence using SQLlite 
 # sessions = []
 
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from fastapi import Depends, HTTPException
-from sqlalchemy.orm import Session
-
 import models
 import schemas
 from database import engine, SessionLocal
@@ -41,7 +38,10 @@ def create_session(
 
     return new_session
 
-@app.get("/sessions")
+@app.get(
+    "/sessions",
+    response_model=list[schemas.SessionResponse]
+)
 def get_sessions(
     db: Session = Depends(get_db)
 ):
@@ -49,7 +49,7 @@ def get_sessions(
         models.StudySession
     ).all()
 
-@app.get("/sessions/{session_id}")
+@app.get("/sessions/{session_id}",response_model=schemas.SessionResponse)
 def get_sessions_id(
     session_id:int,
     db: Session = Depends(get_db)
